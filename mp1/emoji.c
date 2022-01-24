@@ -6,6 +6,8 @@
 // Return your favorite emoji.  Do not allocate new memory.
 // (This should **really** be your favorite emoji, we plan to use this later in the semester. :))
 char *emoji_favorite() {
+
+  
   return "\xF0\x9F\x98\x81";
 }
 
