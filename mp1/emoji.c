@@ -6,7 +6,7 @@
 // Return your favorite emoji.  Do not allocate new memory.
 // (This should **really** be your favorite emoji, we plan to use this later in the semester. :))
 char *emoji_favorite() {
-  return "";
+  return "\xF0\x9F\x98\x81";
 }
 
 
@@ -17,9 +17,10 @@ int emoji_count(const unsigned char *utf8str) {
 }
 
 
-// Return a random emoji stored in new heap memory you have allocated.  Make sure what
+// Return a random emoji stored in new heap memory you have allocated.  Make sure what`
 // you return is a valid C-string that contains only one random emoji.
 char *emoji_random_alloc() {
+  //nothing
   return NULL;
 }
 
