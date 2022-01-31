@@ -21,7 +21,6 @@ int isEmoji(const char *s) {
   for(int i=0; i<strlen(s); i++) {
     val = (val << 8) | ((unsigned int)(s[i]) & 0xFF);
   }
-
   return (
     (val >= 14844092 /* U+203C */ && val <= 14912153 /* U+3299 */) ||
     (val >= 4036984960 /* U+1F000 */ && val <= 4036996031 /* U+1FAFF */ )
@@ -43,6 +42,7 @@ TEST_CASE("`emoji_count` counts one emoji", "[weight=1][part=1]") {
   REQUIRE(r == 1);
   free(s);
 }
+
 
 TEST_CASE("`emoji_count` counts multiple emoji", "[weight=3][part=1]") {
   char *s = (char *) malloc(100);
@@ -79,7 +79,6 @@ TEST_CASE("`emoji_invertChar` inverts smiley face into another emoji", "[weight=
 
 TEST_CASE("`emoji_invertChar` inverts at least six total emojis", "[weight=3][part=1]") {
   int emoji_invert_count = 0;
-
   unsigned int i;
   for (i = 4036984960; i <= 4036995737; i++) {
     char emoji[5];
@@ -97,7 +96,6 @@ TEST_CASE("`emoji_invertChar` inverts at least six total emojis", "[weight=3][pa
       if (emoji_invert_count >= 6) { break; }
     }
   }
-
   REQUIRE( emoji_invert_count >= 6 );
 }
 
@@ -186,7 +184,6 @@ TEST_CASE("`emoji_random_alloc` allocates random emoji", "[weight=3][part=1]") {
   REQUIRE( unique_emoji > total_emojis * 0.5 );
 }
 
-
 TEST_CASE("`emoji_invertFile_alloc` inverts all smiley faces - short text", "[weight=1][part=1]") {
   unsigned char *inverted_content = emoji_invertFile_alloc("tests/txt/invert-short.txt");
   REQUIRE( inverted_content != NULL );
@@ -207,7 +204,7 @@ TEST_CASE("`emoji_invertFile_alloc` inverts all smiley faces - short text", "[we
 TEST_CASE("`emoji_invertFile_alloc` inverts all smiley faces - long text", "[weight=1][part=1]") {
   unsigned char *inverted_content = emoji_invertFile_alloc("tests/txt/invert-long.txt");
   REQUIRE( inverted_content != NULL );
-
+  printf("If I am right, not even here");
   char *testing_emoji = (char *) malloc(5);
   strncpy(testing_emoji, (char *) inverted_content + 17, 4);
   testing_emoji[4] = '\0';
