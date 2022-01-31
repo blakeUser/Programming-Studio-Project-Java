@@ -56,7 +56,7 @@ char * emoji_random_alloc() {
 // Modify the UTF-8 string `utf8str` to invert the FIRST character (which may be up to 4 bytes)
 // in the string if it the first character is an emoji.  At a minimum:
 // - Invert "😊" U+1F60A ("\xF0\x9F\x98\x8A") into ANY non-smiling face.
-// - Choose at least five more emoji to invert.
+// - Choose at least five more emoji to invert
 void emoji_invertChar(unsigned char * utf8str) {
   
   if (strcmp(utf8str, "\xF0\x9F\x98\x8A") == 0) {
