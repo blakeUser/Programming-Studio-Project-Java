@@ -2,22 +2,24 @@
 ifneq (, $(shell which g++-9))
 CXX = g++-9
 else
+ifneq (, $(shell which g++-11))
+CXX = g++-11
+else
 ifneq (, $(shell which g++))
 CXX = g++
 else
 $(error No g++ compiler found.)
 endif
 endif
+endif
 
+CXX += -g $(CS240)
+CFLAGS = -W -Wall -Wno-pointer-sign
+CFLAGS_CATCH = -fpermissive -w
+CC = ${CXX} -x c ${CFLAGS}
 
-# Makefile
-CXX += -g
-FLAGS = $(CS240) -Wall
-CFLAGS_CATCH = -w -fpermissive
-CC = ${CXX} ${FLAGS} -x c
 
 all: png-analyze png-extractGIF png-hideGIF png-rewrite
-
 
 # .o rules:
 crc.o: lib/crc32.c
@@ -54,7 +56,7 @@ png-rewrite: crc.o png.o png-rewrite.o
 
 
 # tests
-test: tests/test.o png.o crc.o tests/test-extract.cpp tests/test-hide.cpp tests/test-libpng.cpp
+test: png.o crc.o tests/test-extract.cpp tests/test-hide.cpp tests/test-libpng.cpp tests/test.o
 	$(CXX) $(CFLAGS_CATCH) $^ -o $@
 
 tests/test.o: tests/test.cpp
