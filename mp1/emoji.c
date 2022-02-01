@@ -27,6 +27,7 @@ int emoji_count(const unsigned char * utf8str) {
   int counterOfValidEmoji = 0;
   for (size_t i = 0; i < strlen(utf8str) - 3; i++) {
     char * tmpCopyStr = malloc(5);
+    //tmpcopystr[5]?
     tmpCopyStr[4] = '\0';
     for (int j = 0; j < 4; j++) {
       tmpCopyStr[j] = utf8str[i + j];
@@ -34,6 +35,7 @@ int emoji_count(const unsigned char * utf8str) {
     if (isEmoji(tmpCopyStr) == 1) {
       counterOfValidEmoji++;
     }
+    free(tmpCopyStr);
   }
   return counterOfValidEmoji;
 }
@@ -49,7 +51,8 @@ char * emoji_random_alloc() {
   random[2] = num2; //为什么在这里数字也行，最后都会变成UTF-8 or ASCII？
   random[3] = num3;
   random[4] = '\0';
-  return random;
+
+  return random; //what is gonna happen here?
 }
 
 
@@ -58,6 +61,8 @@ char * emoji_random_alloc() {
 // - Invert "😊" U+1F60A ("\xF0\x9F\x98\x8A") into ANY non-smiling face.
 // - Choose at least five more emoji to invert.
 void emoji_invertChar(unsigned char * utf8str) {
+  int length = strlen(utf8str);
+  utf8str[length] = '\0';
   
   if (strcmp(utf8str, "\xF0\x9F\x98\x8A") == 0) {
         utf8str[3] = '\x91';
@@ -77,8 +82,8 @@ void emoji_invertChar(unsigned char * utf8str) {
       utf8str[i + 3] = '\xB2';
       utf8str[i + 3] = '\xB9';
     }
+    free(tmpCopyStr);
   }
-
 }
 
 // Modify the UTF-8 string `utf8str` to invert ALL of the character by calling your
@@ -90,9 +95,13 @@ void emoji_invertAll(unsigned char *utf8str) {
 // Reads the full contents of the file `fileName, inverts all emojis, and
 // returns a newly allocated string with the inverted file's content.
 unsigned char * emoji_invertFile_alloc(const char * fileName) {
-  char * buffer = 0;
+  char * buffer = malloc(90);
   long length;
   FILE * f = fopen (fileName, "rb");
+  if (f == NULL) {
+    free(buffer);
+    return NULL;
+  }
     if (f) {
       fseek (f, 0, SEEK_END);
       length = ftell (f);
@@ -103,9 +112,8 @@ unsigned char * emoji_invertFile_alloc(const char * fileName) {
       }
       fclose (f);
     }
-
   buffer[length] = '\0';
-  if (strlen(buffer) == 0) {
+  if (buffer[0] == '\0') {
     return NULL;
   } 
   emoji_invertAll(buffer);
