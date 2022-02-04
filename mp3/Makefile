@@ -76,7 +76,7 @@ tests/samples_exe/%: tests/samples/%.c
 
 
 # Add target for tests
-test: tests/test.o tests/lib/mstats-utils.so tests/test-sample.cpp tests/test-testers.cpp
+test: tests/test.o tests/lib/mstats-utils.so tests/test-sample.cpp tests/test-testers.cpp tests/test-start.cpp
 	$(CXX) $(CFLAGS_CATCH) $^ -o $@
 
 tests/lib/mstats-utils.so: tests/lib/mstats-utils.c
