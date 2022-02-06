@@ -13,10 +13,10 @@
  * with an emoji.  When this function returns `true`, `s` starts with something that is within
  * the range of valid emoji characters.  However, this range is sparse and this function does
  * not check if the emoji is a defined emoji.
- * 
+ * asdf
  * See Unicode's Emoji List: https://www.unicode.org/Public/UCD/latest/ucd/emoji/emoji-data.txt
  */
-int isEmoji(const char *s) {
+int isEmoji(const char * s) {
   unsigned int val = 0;
   for(int i=0; i<strlen(s); i++) {
     val = (val << 8) | ((unsigned int)(s[i]) & 0xFF);

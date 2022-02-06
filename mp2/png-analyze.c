@@ -25,7 +25,7 @@ int png_analyze(const char *png_filename) {
     // Check for the "IEND" chunk to exit:
     if ( strcmp(chunk.type, "IEND") == 0 ) {
       PNG_free_chunk(&chunk);
-      break;  
+      break;
     }
 
     // Free the memory associated with the chunk we just read:

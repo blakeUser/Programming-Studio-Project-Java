@@ -1,5 +1,9 @@
 #pragma once
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <arpa/inet.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -8,6 +12,11 @@ extern "C" {
 // PNG
 struct _PNG {
   // Add any elements you need to store the PNG here:
+  // char * signiture;
+  
+  char * theString;
+  FILE* pointer_key;
+
 };
 typedef struct _PNG PNG;
 

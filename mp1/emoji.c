@@ -112,6 +112,7 @@ unsigned char * emoji_invertFile_alloc(const char * fileName) {
       }
       fclose (f);
     }
+    
   buffer[length] = '\0';
   if (buffer[0] == '\0') {
     return NULL;
