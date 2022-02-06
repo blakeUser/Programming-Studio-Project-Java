@@ -134,6 +134,7 @@ size_t PNG_write(PNG *png, PNG_Chunk *chunk) {
 
   // fread( &length, 4, 1, (png->pointer_key) );   // stored in network order in the file
   // length = ntohl(length);  
+  
   //fwrite(signiture, sizeof(char), sizeof(buffer), fstream);
   fwrite(htonl(toTransfer), sizeof(uint16_t), sizeof(toTransfer), png->pointer_key);
 
