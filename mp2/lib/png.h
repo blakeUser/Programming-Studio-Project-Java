@@ -30,7 +30,7 @@ typedef struct _PNG PNG;
 struct _PNG_Chunk {
   uint32_t len;
   char type[5];
-  unsigned char *data;
+  unsigned char * data;
   uint32_t crc;
 };
 typedef struct _PNG_Chunk PNG_Chunk;

@@ -63,7 +63,6 @@
 //   // printf("_______________________\n");
 
 //   PNG_read(png, &chunk);
-//   printf("%d When test case len == 0 :\n", PNG_read(png, &chunk));
 //   CHECK(strcmp(chunk.type, "IEND") == 0);
 //   CHECK(chunk.len == 0);
 //   PNG_free_chunk(&chunk);
@@ -101,18 +100,15 @@
 // TEST_CASE("`PNG_open` writes a PNG header", "[weight=1][part=1]") {
 //   PNG *png;
 //   png = PNG_open("TEST_output.png", "w"); 
-//   printf("%d the position of f is \n", ftell(png->pointer_key));
 
 //   REQUIRE(png != NULL);
 //   PNG_close(png);
 
 //   FILE *f = fopen("TEST_output.png", "r");
-//   printf("%d the position of f is \n", ftell(f));
 //   REQUIRE(f != NULL);
 
 //   unsigned char *buffer = (unsigned char *) malloc(8);
 //   fread(buffer, sizeof(char), 8, f);
-//   printf("%d the position of f is \n", ftell(f));
 //   fclose(f);
 
 //   CHECK( buffer[0] == 0x89 );
@@ -128,87 +124,87 @@
 //   system("rm -f TEST_output.png");
 // }
 
-TEST_CASE("`PNG_write` writes a PNG chunk and CRC", "[weight=1][part=1]") {
-  PNG *png;
 
-  // Write TEST_output.png
-  png = PNG_open("TEST_output.png", "w");
-  PNG_Chunk chunk;
-  chunk.type[0] = 'I';
-  chunk.type[1] = 'H';
-  chunk.type[2] = 'D';
-  chunk.type[3] = 'R';
-  chunk.type[4] = 0x00;
-  chunk.len = 4;
-  chunk.data = (unsigned char *)"uiuc";
-  PNG_write(png, &chunk);
+// TEST_CASE("`PNG_write` writes a PNG chunk and CRC", "[weight=1][part=1]") {
+//   PNG *png;
+//   // Write TEST_output.png
+//   png = PNG_open("TEST_output.png", "w");
+//   PNG_Chunk chunk;
+//   chunk.type[0] = 'I';
+//   chunk.type[1] = 'H';
+//   chunk.type[2] = 'D';
+//   chunk.type[3] = 'R';
+//   chunk.type[4] = 0x00;
+//   chunk.len = 4;
 
-  PNG_close(png);
+//   chunk.data = (unsigned char *)"uiuc";
+//   PNG_write(png, &chunk);
+//   PNG_close(png);
 
-  // Verify contents...
-  FILE *f = fopen("TEST_output.png", "r");
-  REQUIRE(f != NULL);
+//   // Verify contents...
+//   FILE *f = fopen("TEST_output.png", "r");
+//   REQUIRE(f != NULL);
 
-  unsigned char *buffer = (unsigned char *) malloc(24);
-  fread(buffer, sizeof(char), 24, f);
-  fclose(f);
+//   unsigned char *buffer = (unsigned char *) malloc(24);
+//   fread(buffer, sizeof(char), 24, f);
+//   fclose(f);
 
-  // Length (in network byte order):
-  CHECK( buffer[ 8] == 0 );
-  CHECK( buffer[ 9] == 0 );
-  CHECK( buffer[10] == 0 );
-  CHECK( buffer[11] == 4 );
+//   // Length (in network byte order):
+//   CHECK( buffer[8] == 0 );
+//   CHECK( buffer[9] == 0 );
+//   CHECK( buffer[10] == 0 );
+//   CHECK( buffer[11] == 4 );
 
-  // Chunk Type:
-  CHECK( buffer[12] == 'I' );
-  CHECK( buffer[13] == 'H' );
-  CHECK( buffer[14] == 'D' );
-  CHECK( buffer[15] == 'R' );
+//   // Chunk Type:
+//   CHECK( buffer[12] == 'I' );
+//   CHECK( buffer[13] == 'H' );
+//   CHECK( buffer[14] == 'D' );
+//   CHECK( buffer[15] == 'R' );
 
-  // Chunk Data:
-  CHECK( buffer[16] == 'u' );
-  CHECK( buffer[17] == 'i' );
-  CHECK( buffer[18] == 'u' );
-  CHECK( buffer[19] == 'c' );
+//   // Chunk Data:
+//   CHECK( buffer[16] == 'u' );
+//   CHECK( buffer[17] == 'i' );
+//   CHECK( buffer[18] == 'u' );
+//   CHECK( buffer[19] == 'c' );
 
-  // CRC (in network byte order):
-  CHECK( buffer[20] == 0x6f );
-  CHECK( buffer[21] == 0x1a );
-  CHECK( buffer[22] == 0xf4 );
-  CHECK( buffer[23] == 0x30 );
+//   // CRC (in network byte order):
+//   CHECK( buffer[20] == 0x6f );
+//   CHECK( buffer[21] == 0x1a );
+//   CHECK( buffer[22] == 0xf4 );
+//   CHECK( buffer[23] == 0x30 );
 
-  free(buffer);
-  system("rm -f TEST_output.png");
-}
+//   free(buffer);
+//   system("rm -f TEST_output.png");
+// }
 
-TEST_CASE("`PNG_write` writes a PNG chunk with correct endianness", "[weight=1][part=1]") {
-  PNG *png;
-  // Write TEST_output.png
-  png = PNG_open("TEST_output.png", "w");
-  PNG_Chunk wchunk;
-  wchunk.type[0] = 'I';
-  wchunk.type[1] = 'H';
-  wchunk.type[2] = 'D';
-  wchunk.type[3] = 'R';
-  wchunk.type[4] = 0x00;
-  wchunk.len = 4;
-  wchunk.data = (unsigned char *)"uiuc";
-  PNG_write(png, &wchunk);
+// TEST_CASE("`PNG_write` writes a PNG chunk with correct endianness", "[weight=1][part=1]") {
+//   PNG *png;
+//   // Write TEST_output.png
+//   png = PNG_open("TEST_output.png", "w");
+//   PNG_Chunk wchunk;
+//   wchunk.type[0] = 'I';
+//   wchunk.type[1] = 'H';
+//   wchunk.type[2] = 'D';
+//   wchunk.type[3] = 'R';
+//   wchunk.type[4] = 0x00;
+//   wchunk.len = 4;
+//   wchunk.data = (unsigned char *)"uiuc";
+//   PNG_write(png, &wchunk);
 
-  PNG_close(png);
+//   PNG_close(png);
 
-  // Verify contents...
-  png = PNG_open("TEST_output.png", "r");
+//   // Verify contents...
+//   png = PNG_open("TEST_output.png", "r");
 
-  PNG_Chunk rchunk;
-  CHECK(PNG_read(png, &rchunk) == 16);
-  CHECK(strcmp(rchunk.type, "IHDR") == 0);
-  // Length (in little endian order):
-  CHECK(rchunk.len == 4);
-  // CRC (in little endian order):
-  CHECK(rchunk.crc == 0x6f1af430);
-  PNG_free_chunk(&rchunk);
-  PNG_close(png);
-
-  system("rm -f TEST_output.png");
-}
+//   PNG_Chunk rchunk;
+//   CHECK(PNG_read(png, &rchunk) == 16);
+//   CHECK(strcmp(rchunk.type, "IHDR") == 0);
+//   // Length (in little endian order):
+//   CHECK(rchunk.len == 4);
+//   // CRC (in little endian order):
+//   CHECK(rchunk.crc == 0x6f1af430);
+  
+//   PNG_free_chunk(&rchunk);
+//   PNG_close(png);
+//   system("rm -f TEST_output.png");
+// }
