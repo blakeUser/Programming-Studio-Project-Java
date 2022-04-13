@@ -46,7 +46,6 @@ int GameConsole::moveNextStep(std::string direction) {
     }
 
     CheckHitTheWall();
-
     if (current_food_location_ == the_first_snake_->GetCurrentPosition()) {
         the_first_snake_->length_++;
         SetRandomFoodLocation();
