@@ -11,10 +11,15 @@
 
 class GameConsole {
     public:
+
     GameConsole(int width, int height, int length);
+
     int moveNextStep(std::string direction);
+
     void EndGame();
+
     void CheckHitTheWall();
+
     void SetRandomFoodLocation();
 
     private:
@@ -22,8 +27,6 @@ class GameConsole {
     std::pair<int, int> current_food_location_;
 
     std::string moving_status_; //If not doing anything, what is the snake currently doing?
-
-    std::vector<std::pair<int, int>> body_positions_;
 
     Snake * the_first_snake_;
 
@@ -33,6 +36,4 @@ class GameConsole {
 
     int height_;
 };
-
-
 #endif //UNTITLED_GAME_CONSOLE_H

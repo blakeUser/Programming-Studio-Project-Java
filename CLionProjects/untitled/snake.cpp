@@ -6,6 +6,7 @@
 Snake::Snake(int length) {
     length_ = length;
     current_position_ = std::pair<int, int>(0, 0);
+    body_positions_.push_back(current_position_);
 }
 
 std::pair<int, int> Snake::GetCurrentPosition() {return current_position_; }
