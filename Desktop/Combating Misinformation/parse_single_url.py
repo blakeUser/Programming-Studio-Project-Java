@@ -13,7 +13,7 @@ import requests
 
 
 def parse_single_url(url):
-    # url = "https://www.sciencenews.org/article/orange-dwarf-stars-radiation-goldilocks-habitable-planets"
+    url = "https://www.sciencenews.org/article/blu-ray-discs-get-repurposed-improve-solar-cells"
     html = urlopen(url)
     obj = bf(html.read(),'html.parser')
     title = obj.body.attrs = {'class': 'post-template-default single single-post postid-3112192 single-format-standard single-header-default'}
@@ -23,6 +23,9 @@ def parse_single_url(url):
         new = mydiv.find(id="page")
         content = new.find(id="content")
         post = content.article
+        category = find_category(post)
+        author_and_date = find_author_and_date(post)
+        print(category)
         paragraph = post.find("div", {"class": "single__body___XFYC7"})
         if paragraph is None:
             return None
@@ -45,7 +48,29 @@ def parse_single_url(url):
             to_append = to_append.replace("<p>", "")
             paragraphs.append(to_append)
             toReturn = {"paragraph" : paragraphs}
-        print(toReturn)
+        print(toReturn)    
         return toReturn
     
-#parse_single_url("s")
+    
+def find_category(post):
+    header = post.header
+    wrapper = header.find("div", {"class": "header-default__content___3FBML"})
+    wrapper_default = wrapper.find("div", {"class": "header-default__terms___y7T55"})
+    span = wrapper_default.span
+    category = span.find("a")
+    word_cat = category.get_text()
+    word_cat = word_cat.strip()
+    return word_cat
+
+
+def find_author_and_date(post):
+    wrapper = post.find("div", {"class": "single__byline-container___3EW6e"})
+    deeper_wrapper = wrapper.find("div", {"class": "single__byline-wrapper___pSAjm"})
+    name_author = deeper_wrapper.find("div", {"class": "byline__wrapper___4FOTC"}).find("div", {"class": "byline-inner"}).find("p").find("a").get_text()
+    print(name_author)
+    time_publish = deeper_wrapper.find("div", {"class": "byline__wrapper___4FOTC"}).find("div", {"class": "byline-inner"}).find("p", {"class": "byline__published___3GjAo"}).time.get("datetime")
+    print(time_publish)
+
+def find_shares():
+    return ""
+parse_single_url("s")

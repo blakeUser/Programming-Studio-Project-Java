@@ -25,7 +25,7 @@ for site_map in all_site_map:
     content = tag.contents
     loc_list.append(content)
 
-inner_websites = []
+#inner_websites = []
 content_of_all_paragraph_url = []
 counter = 0
 for loc in loc_list:
@@ -34,19 +34,23 @@ for loc in loc_list:
     #     break
     url_str = (str(loc[0]))
     resp = requests.get(url_str)
-    inner_websites.append(resp.content)
-    with open('sciencejournal.xml', 'wb') as foutput:
-        foutput.write(resp.content)
-    with open("sciencejournal.xml", "r") as file:
-    # Read each line in the file, readlines() returns a list of lines   
-        content = file.readlines()
+    # inner_websites.append(resp.content)
+    content = resp.content
+    # print(resp.content)
+    # with open('sciencejournal.xml', 'wb') as foutput:
+    #     foutput.write(resp.content)
+    # with open("sciencejournal.xml", "r") as file:
+    # # Read each line in the file, readlines() returns a list of lines   
+    #     content = file.readlines()
+
         # Combine the lines in the list into a string
-        content = "".join(content)
-        bs_contents = bs(content, "lxml")
-        all_loc_authentic = bs_contents.find_all("loc")
-        for loc_authentic in all_loc_authentic:
-            #print((loc_authentic.contents[0]))
-            content_of_all_paragraph_url.append(loc_authentic.contents[0])
+    #content = "".join(content)
+    bs_contents = bs(content, "lxml")
+    all_loc_authentic = bs_contents.find_all("loc")
+    #print(all_loc_authentic)
+    for loc_authentic in all_loc_authentic:
+        #print((loc_authentic.contents[0]))
+        content_of_all_paragraph_url.append(loc_authentic.contents[0])
 
 paragraph_list = []
 
