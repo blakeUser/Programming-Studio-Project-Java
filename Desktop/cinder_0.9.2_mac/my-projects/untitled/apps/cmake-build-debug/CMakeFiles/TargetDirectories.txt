@@ -1,0 +1,3 @@
+/Users/song15101556787/Desktop/cinder_0.9.2_mac/my-projects/untitled/apps/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/song15101556787/Desktop/cinder_0.9.2_mac/my-projects/untitled/apps/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/song15101556787/Desktop/cinder_0.9.2_mac/my-projects/untitled/apps/cmake-build-debug/CMakeFiles/cinder-snake.dir
