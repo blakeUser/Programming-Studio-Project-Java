@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "56070950926",
+    "project_id": "myprojectudemy",
+    "storage_bucket": "myprojectudemy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56070950926:android:e08edcb3268ebed0cc6c5f",
+        "android_client_info": {
+          "package_name": "com.example.udemyshopping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56070950926-l6dnjvt9mvmnipmn9ss3ek56ans25i00.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.udemyshopping",
+            "certificate_hash": "6a662b476656719724bf7d99e5af470ebb94bc28"
+          }
+        },
+        {
+          "client_id": "56070950926-4976koq1nde4v3mmjrqm41spskm26drb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLpVYQ5Mb5ISW3rJDOWvbBWcD6v8attdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56070950926-4976koq1nde4v3mmjrqm41spskm26drb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
